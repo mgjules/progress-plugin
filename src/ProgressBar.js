@@ -8,6 +8,7 @@ export default class ProgressBar {
 	trickleInterval = null;
 
 	constructor({
+		containerSelector = '#progress-bar-container',
 		className = 'progress-bar',
 		styleAttr = 'data-progressbar-styles',
 		animationDuration = 300,
@@ -15,6 +16,7 @@ export default class ProgressBar {
 		initialValue = 0.25,
 		trickleValue = 0.03
 	} = {}) {
+		this.containerSelector = containerSelector;
 		this.className = className;
 		this.styleAttr = styleAttr;
 		this.animationDuration = animationDuration;
@@ -79,7 +81,12 @@ export default class ProgressBar {
 	installProgressElement() {
 		this.progressElement.style.width = '0%';
 		this.progressElement.style.opacity = '1';
-		document.documentElement.insertBefore(this.progressElement, document.body);
+		const container = document.querySelector(this.containerSelector)
+		if (container) {
+			container.appendChild(this.progressElement);
+		} else {
+			document.documentElement.insertBefore(this.progressElement, document.body);
+		}
 		this.progressElement.scrollTop = 0; // Force reflow to ensure initial style takes effect
 		this.setValue(Math.random() * this.initialValue);
 	}
@@ -91,7 +98,12 @@ export default class ProgressBar {
 
 	uninstallProgressElement() {
 		if (this.progressElement.parentNode) {
-			document.documentElement.removeChild(this.progressElement);
+			const container = document.querySelector(this.containerSelector)
+			if (container) {
+				container.removeChild(this.progressElement);
+			} else {
+				document.documentElement.removeChild(this.progressElement);
+			}
 		}
 	}
 

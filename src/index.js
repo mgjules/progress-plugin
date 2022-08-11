@@ -7,6 +7,7 @@ export default class SwupProgressPlugin extends Plugin {
 	constructor(options = {}) {
 		super();
 		const defaultOptions = {
+			containerSelector: '#swup-progress-bar-container', 
 			className: 'swup-progress-bar',
 			delay: 300,
 			transition: undefined,
@@ -23,6 +24,7 @@ export default class SwupProgressPlugin extends Plugin {
 		this.showProgressBarTimeout = null;
 
 		this.progressBar = new ProgressBar({
+			containerSelector: this.options.containerSelector,
 			className: this.options.className,
 			animationDuration: this.options.transition,
 			minValue: this.options.minValue,

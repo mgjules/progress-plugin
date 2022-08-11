@@ -192,6 +192,7 @@ var SwupProgressPlugin = function (_Plugin) {
 		};
 
 		var defaultOptions = {
+			containerSelector: '#swup-progress-bar-container',
 			className: 'swup-progress-bar',
 			delay: 300,
 			transition: undefined,
@@ -205,6 +206,7 @@ var SwupProgressPlugin = function (_Plugin) {
 		_this.showProgressBarTimeout = null;
 
 		_this.progressBar = new _ProgressBar2.default({
+			containerSelector: _this.options.containerSelector,
 			className: _this.options.className,
 			animationDuration: _this.options.transition,
 			minValue: _this.options.minValue,
@@ -306,6 +308,8 @@ var ProgressBar = function () {
 		var _this = this;
 
 		var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+		    _ref$containerSelecto = _ref.containerSelector,
+		    containerSelector = _ref$containerSelecto === undefined ? '#progress-bar-container' : _ref$containerSelecto,
 		    _ref$className = _ref.className,
 		    className = _ref$className === undefined ? 'progress-bar' : _ref$className,
 		    _ref$styleAttr = _ref.styleAttr,
@@ -333,6 +337,7 @@ var ProgressBar = function () {
 			_this.setValue(_this.value + advance);
 		};
 
+		this.containerSelector = containerSelector;
 		this.className = className;
 		this.styleAttr = styleAttr;
 		this.animationDuration = animationDuration;
@@ -388,7 +393,12 @@ var ProgressBar = function () {
 		value: function installProgressElement() {
 			this.progressElement.style.width = '0%';
 			this.progressElement.style.opacity = '1';
-			document.documentElement.insertBefore(this.progressElement, document.body);
+			var container = document.querySelector(this.containerSelector);
+			if (container) {
+				container.appendChild(this.progressElement);
+			} else {
+				document.documentElement.insertBefore(this.progressElement, document.body);
+			}
 			this.progressElement.scrollTop = 0; // Force reflow to ensure initial style takes effect
 			this.setValue(Math.random() * this.initialValue);
 		}
@@ -402,7 +412,12 @@ var ProgressBar = function () {
 		key: 'uninstallProgressElement',
 		value: function uninstallProgressElement() {
 			if (this.progressElement.parentNode) {
-				document.documentElement.removeChild(this.progressElement);
+				var container = document.querySelector(this.containerSelector);
+				if (container) {
+					container.removeChild(this.progressElement);
+				} else {
+					document.documentElement.removeChild(this.progressElement);
+				}
 			}
 		}
 	}, {
