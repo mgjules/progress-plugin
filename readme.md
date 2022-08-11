@@ -52,6 +52,7 @@ The progressbar has a class name of `swup-progress-bar` you can use for styling.
 
 ```javascript
 {
+  containerSelector: '#swup-progress-bar-container',
   className: 'swup-progress-bar',
   transition: 300,
   delay: 300,
@@ -59,6 +60,10 @@ The progressbar has a class name of `swup-progress-bar` you can use for styling.
   hideImmediately: true
 }
 ```
+
+### containerSelector
+
+CSS Selector of container to append progress bar element as child. If empty, the progress bar will be added before the body element.
 
 ### className
 
