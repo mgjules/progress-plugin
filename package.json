@@ -1,6 +1,6 @@
 {
   "name": "@mgjules/swup-progress-plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Swup plugin for displaying a loading indicator",
   "main": "lib/index.js",
   "scripts": {
