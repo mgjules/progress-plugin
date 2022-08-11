@@ -12,13 +12,13 @@ More or less a port of Turbolink's implementation.
 This plugin can be installed with npm
 
 ```bash
-npm install @mgjules/progress-plugin
+npm install @mgjules/swup-progress-plugin
 ```
 
 and included with import
 
 ```shell
-import SwupProgressPlugin from '@mgjules/progress-plugin';
+import SwupProgressPlugin from '@mgjules/swup-progress-plugin';
 ```
 
 or included from the dist folder
